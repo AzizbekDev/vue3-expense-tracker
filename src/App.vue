@@ -23,6 +23,18 @@ onMounted(async () => {
 const total = computed(() => {
   return transactions.value.reduce((acc, transaction) => acc + transaction.amount, 0)
 })
+// Get Income
+const income = computed(() => {
+  return transactions.value.
+    filter(transaction => transaction.amount > 0).
+    reduce((acc, transaction) => acc + transaction.amount, 0)
+})
+// Get Expense
+const expenses = computed(() => {
+  return transactions.value.
+    filter(transaction => transaction.amount < 0).
+    reduce((acc, transaction) => acc + transaction.amount, 0)
+})
 
 </script>
 
@@ -30,7 +42,7 @@ const total = computed(() => {
   <Header />
   <div class="container">
     <Balance :total="total" />
-    <IncomeExpense />
+    <IncomeExpense :income="income" :expenses="expenses" />
     <TransactionList :transactions="transactions" />
     <AddTransaction />
   </div>
