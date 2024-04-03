@@ -1,7 +1,11 @@
-import './assets/style.css'
-import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
-
 import { createApp } from 'vue'
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+import './assets/style.css'
 import App from './App.vue'
 
-createApp(App).use(autoAnimatePlugin).mount('#app')
+const app = createApp(App)
+app.use(Toast)
+app.use(autoAnimatePlugin)
+app.mount('#app')
