@@ -17,9 +17,7 @@ const onSubmit = () => {
         text: text.value,
         amount: parseFloat(amount.value)
     }
-
     emit('transactionSubmited', transactionData)
-    toast.success('Transaction added successfully')
     text.value = '';
     amount.value = '';
 }
