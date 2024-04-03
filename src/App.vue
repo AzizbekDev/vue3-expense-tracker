@@ -36,14 +36,23 @@ const expenses = computed(() => {
     reduce((acc, transaction) => acc + transaction.amount, 0)
 })
 
+const onTransactionSubmited = async (transactionData) => {
+  try {
+    const { data } = await axios.post('https://26434691557145f7.mokky.dev/transactions', transactionData)
+    transactions.value = [...transactions.value, data]
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 </script>
 
 <template>
   <Header />
   <div class="container">
-    <Balance :total="total" />
-    <IncomeExpense :income="income" :expenses="expenses" />
+    <Balance :total="+total" />
+    <IncomeExpense :income="+income" :expenses="+expenses" />
     <TransactionList :transactions="transactions" />
-    <AddTransaction />
+    <AddTransaction @transaction-submited="onTransactionSubmited" />
   </div>
 </template>
